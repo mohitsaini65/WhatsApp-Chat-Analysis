@@ -140,7 +140,3 @@ if uploaded_file:
         user_counts = df['user'].value_counts()
         st.bar_chart(user_counts)
 
-    # Most Active Users
-    st.subheader("👥 Most Active Users")
-    user_counts = df['user'].value_counts()
-    st.bar_chart(user_counts)
