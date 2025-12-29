@@ -46,6 +46,7 @@ if uploaded_file:
     col4.metric("Active Days", df['date'].dt.date.nunique())
 
     # ---------------- MONTHLY TIMELINE ----------------
+        # ---------------- MONTHLY TIMELINE ----------------
     st.title("📅 Monthly Timeline")
 
     timeline = (
@@ -59,7 +60,9 @@ if uploaded_file:
     )
 
     timeline['time'] = timeline['month'].astype(str) + "-" + timeline['year'].astype(str)
+
     st.line_chart(timeline.set_index('time')['message'])
+
 
     # ---------------- DAILY TIMELINE ----------------
     st.title("📆 Daily Timeline")
