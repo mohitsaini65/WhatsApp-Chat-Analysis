@@ -43,9 +43,20 @@ if uploaded_file:
 
     # ─── MONTHLY TIMELINE ─────────────────────
     st.title("Monthly Timeline")
-    timeline = df.groupby([df['date'].dt.year, df['date'].dt.month]).count()['message'].reset_index()
-    timeline.columns = ['year', 'month', 'message']
-    timeline['time'] = timeline['month'].astype(str) + "-" + timeline['year'].astype(str)
+    st.title("Monthly Timeline")
+
+timeline = (
+    df
+    .assign(year=df['date'].dt.year, month=df['date'].dt.month)
+    .groupby(['year', 'month'])
+    .agg(message=('message', 'count'))
+    .reset_index()
+)
+
+timeline['time'] = timeline['month'].astype(str) + "-" + timeline['year'].astype(str)
+
+st.line_chart(timeline.set_index('time')['message'])
+
     st.line_chart(timeline.set_index('time')['message'])
 
     # ─── DAILY TIMELINE ───────────────────────
